@@ -25,7 +25,7 @@ var Page = db.define('page', {
 
 });
 Page.hook('beforeValidate', function (page) {
-        if (Page.title) {
+        if (page.title) {
           // Removes all non-alphanumeric characters from title
           // And make whitespace underscore
           page.urlTitle =  page.title.replace(/\s+/g, '_').replace(/\W/g, '');
@@ -46,6 +46,7 @@ var User = db.define('user', {
             }
     }
 });
+Page.belongsTo(User, { as: 'author'});
 
 module.exports = {
   Page: Page,
